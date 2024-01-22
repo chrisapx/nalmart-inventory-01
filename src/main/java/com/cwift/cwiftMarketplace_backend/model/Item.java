@@ -31,7 +31,7 @@ public class Item {
     @NotNull(message = "Free delivery must not be null")
     private boolean freeDelivery;
     private int stockCount;
-    private String Brand;
+    private String brand;
     private String serialNumber;
     private long vendorID;
     @Enumerated(EnumType.STRING)
