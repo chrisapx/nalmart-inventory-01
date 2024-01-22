@@ -33,7 +33,6 @@ jobs:
           cd backend
           cd cwift-marketplace-backend
           git pull origin master
-#          mvn clean install
           ./mvnw spring-boot:run
 
           # Additional commands for starting your Spring Boot application go here
