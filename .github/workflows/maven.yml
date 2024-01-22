@@ -37,7 +37,8 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          cd /path/to/your/project
+          cd backend
+          cd cwift-marketplace-backend
           git pull origin master
           mvn clean install
           ./mvnw spring-boot:run
