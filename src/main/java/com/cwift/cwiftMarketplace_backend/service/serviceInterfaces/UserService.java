@@ -1,9 +1,7 @@
 package com.cwift.cwiftMarketplace_backend.service.serviceInterfaces;
 
-import com.cwift.cwiftMarketplace_backend.model.Role;
 import com.cwift.cwiftMarketplace_backend.model.RoleName;
 import com.cwift.cwiftMarketplace_backend.model.User;
-import com.cwift.cwiftMarketplace_backend.repository.UserRepository;
 
 import java.util.List;
 
