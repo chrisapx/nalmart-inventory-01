@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -82,6 +83,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<String> getAllRoleNames () {
-        return Arrays.stream( RoleName.values () ).map ( RoleName:: name ).toList ();
+        return Arrays.stream( RoleName.values () ).map ( RoleName:: name ).collect( Collectors.toList());
     }
 }

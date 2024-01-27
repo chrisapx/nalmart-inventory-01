@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CwiftMarketplaceBackendApplication {
 
 	public static void main(String[] args) {
+//		System.out.println ( IDGenerator.accountNumber ().toCharArray ().length );
+//		System.out.println ( System.currentTimeMillis() );
 		SpringApplication.run(CwiftMarketplaceBackendApplication.class, args);
 	}
 

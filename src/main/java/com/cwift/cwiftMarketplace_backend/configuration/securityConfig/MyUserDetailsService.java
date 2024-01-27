@@ -34,7 +34,7 @@
 //    @Override
 //    @Transactional(propagation = Propagation.REQUIRES_NEW)
 //    public User loadUserByUsername(String userNameOrEmailOrPhone) throws UsernameNotFoundException {
-//        Optional<com.cwift.cwiftMarketplace_backend.model.User> authUser = Optional.ofNullable(userRepository.findByUserNameOrEmailOrPhone(userNameOrEmailOrPhone, userNameOrEmailOrPhone, userNameOrEmailOrPhone));
+//        Optional<com.cwift.cwiftMarketplace_backend.model.User> authUser = Optional.ofNullable(userRepository.findByUsernameOrEmailOrPhone(userNameOrEmailOrPhone, userNameOrEmailOrPhone, userNameOrEmailOrPhone));
 //        authUser.orElseThrow(()-> new UsernameNotFoundException("user does not exist"));
 //
 //        if(authUser.get ().isVerified ()){

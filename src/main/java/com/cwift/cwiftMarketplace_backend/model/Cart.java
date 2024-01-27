@@ -3,38 +3,24 @@ package com.cwift.cwiftMarketplace_backend.model;
 import com.cwift.cwiftMarketplace_backend.utils.IDGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
-@Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class User extends Person{
-
+@Entity
+public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    @Column(unique = true)
-    @NotNull
-    private String username;
-    @NotNull
-    private String password;
-    private boolean verified;
-
-    private double cwiftPayBalance;
-
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Role> roles;
+    private List<ItemOrder> itemOrders;
+    private double totalPrice;
 
-    private Date modified_at;
-    private String userID = IDGenerator.userIDGenerator ();
+    private String cartID = IDGenerator.cartIDGenerator ();
     private Date dateCreated = new Date ();
 }

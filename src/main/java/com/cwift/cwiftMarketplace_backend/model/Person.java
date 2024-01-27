@@ -1,13 +1,14 @@
 package com.cwift.cwiftMarketplace_backend.model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.OneToOne;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 
 @MappedSuperclass

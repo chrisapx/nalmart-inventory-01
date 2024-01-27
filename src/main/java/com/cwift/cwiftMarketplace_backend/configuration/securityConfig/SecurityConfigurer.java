@@ -16,6 +16,8 @@
 //import org.springframework.security.crypto.password.PasswordEncoder;
 //import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 //
+//import javax.servlet.Filter;
+//
 //@Configuration
 //@EnableWebSecurity
 //public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
@@ -65,7 +67,7 @@
 //                .anyRequest().authenticated()
 //        .and().sessionManagement()
 //        .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+////        http.addFilterBefore( jwtRequestFilter, UsernamePasswordAuthenticationFilter.class );
 //    }
 //
 //    @Bean

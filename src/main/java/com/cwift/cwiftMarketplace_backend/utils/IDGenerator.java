@@ -33,7 +33,31 @@ public class IDGenerator {
 
 
     public static String itemIDGenerator() {
-        StringBuilder sb = new StringBuilder("sku-");  //This code stands for cwift item id
+        StringBuilder sb = new StringBuilder("sku-");  //This code stands for cwift item sku
+        Random random = new Random();
+
+        // Append timestamp to the unique id to ensure uniqueness
+        long currentTimestamp = System.currentTimeMillis();
+        if (currentTimestamp == lastTimestamp) {
+            counter++;
+        } else {
+            lastTimestamp = currentTimestamp;
+            counter = random.nextInt(10); // Reset counter for new timestamp
+        }
+
+        // Append random number and counter to the unique id
+        sb.append(currentTimestamp).append(counter);
+
+        // Generate the remaining digits
+        for (int i = 0; i < 7; i++) {
+            sb.append(random.nextInt(10));
+        }
+
+        return sb.toString();
+    }
+
+    public static String customItemSkuGenerator() {
+        StringBuilder sb = new StringBuilder("CI-sku-");  //This code stands for cwift custom item sku
         Random random = new Random();
 
         // Append timestamp to the unique id to ensure uniqueness
@@ -57,7 +81,7 @@ public class IDGenerator {
     }
 
     public static String orderIDGenerator() {
-        StringBuilder sb = new StringBuilder("NFO");  //This code stands for cwift foods order
+        StringBuilder sb = new StringBuilder("NFO");  //This code stands for cwift marketplace order id
         Random random = new Random();
 
         // Append timestamp to the unique id to ensure uniqueness
@@ -123,6 +147,31 @@ public class IDGenerator {
         for (int i = 0; i < 7; i++) {
             sb.append(random.nextInt(10));
         }
+
+        return sb.toString();
+    }
+
+    public static String accountNumber() {
+        StringBuilder sb = new StringBuilder("015");  //This code stands for transaction ID
+        Random random = new Random();
+
+        // Append timestamp to the unique id to ensure uniqueness
+        long currentTimestamp = System.currentTimeMillis();
+        if (currentTimestamp == lastTimestamp) {
+            counter++;
+        } else {
+            lastTimestamp = currentTimestamp;
+            counter = random.nextInt(10); // Reset counter for new timestamp
+        }
+
+        // Append random number and counter to the unique id
+        sb.append(currentTimestamp).append ( counter );
+//        sb.append(counter);
+
+        // Generate the remaining digits
+//        for (int i = 0; i < 7; i++) {
+//            sb.append(random.nextInt(10));
+//        }
 
         return sb.toString();
     }

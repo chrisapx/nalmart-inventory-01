@@ -1,25 +1,28 @@
 package com.cwift.cwiftMarketplace_backend.model;
 
+import com.cwift.cwiftMarketplace_backend.utils.IDGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-@SuperBuilder
-public class Role {
-
+@Entity
+public class CwiftPay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private RoleName roleName;
+    private String userID;
+    private String userEmail;
+    private double accountBalance;
+
+    private String accountNumber = IDGenerator.accountNumber ();
+
 }

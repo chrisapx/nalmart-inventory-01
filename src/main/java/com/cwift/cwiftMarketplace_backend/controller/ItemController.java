@@ -1,5 +1,6 @@
 package com.cwift.cwiftMarketplace_backend.controller;
 
+import com.cwift.cwiftMarketplace_backend.model.Category;
 import com.cwift.cwiftMarketplace_backend.model.Item;
 import com.cwift.cwiftMarketplace_backend.service.ItemServiceImpl;
 import org.springframework.http.ResponseEntity;
@@ -48,12 +49,14 @@ public class ItemController {
         return ResponseEntity.ok (itemServiceImpl.editItem ( itemId, item ));
     }
 
+    @DeleteMapping
     public ResponseEntity<String> deleteItemBySku( @RequestParam String sku ){
         return ResponseEntity.ok (itemServiceImpl.deleteItemBySku ( sku ));
     }
 
-    @GetMapping("/status-list")
-    public ResponseEntity<List<String>> orderStatusList(){
-        return ResponseEntity.ok ( itemServiceImpl.getOrderStatusList ());
+    @GetMapping("/categories")
+    public ResponseEntity<List<Category>> getItemCategoryList(  ){
+        return ResponseEntity.ok (itemServiceImpl.getCategoryList ( ));
     }
+
 }
