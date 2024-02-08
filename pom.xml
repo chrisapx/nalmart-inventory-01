@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.cwift</groupId>
-	<artifactId>cwiftMarketplace_backend</artifactId>
+	<artifactId>nalmart-backend-01</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>cwiftMarketplace_backend</name>
 	<description>Cwift marketplace system backend server</description>
