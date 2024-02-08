@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 
@@ -21,6 +22,7 @@ public class Person {
     private String lastname;
     @NotNull
     @Column(unique = true)
+    @Email(message = "Enter valid email")
     private String email;
     @NotNull
     @Column(unique = true)

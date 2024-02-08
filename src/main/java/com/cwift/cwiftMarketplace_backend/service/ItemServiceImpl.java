@@ -5,6 +5,7 @@ import com.cwift.cwiftMarketplace_backend.model.Item;
 import com.cwift.cwiftMarketplace_backend.model.OrderStatus;
 import com.cwift.cwiftMarketplace_backend.repository.ItemRepository;
 import com.cwift.cwiftMarketplace_backend.service.serviceInterfaces.ItemService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,44 +23,44 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-//    @Secure({"ADMIN", "VENDOR"})
+//    @Secured({"ADMIN", "VENDOR"})
     public Item addItem ( Item item ) {
         return itemRepository.save ( item );
     }
 
     @Override
-    //    @Secure({"ADMIN", "VENDOR"})
+    //    @Secured({"ADMIN", "VENDOR"})
     public List<Item> addManyItems ( List<Item> items ) {
         return itemRepository.saveAll ( items );
     }
 
     @Override
-    //    @Secure({"ADMIN", "VENDOR", "SUPER_ADMIN", "USER"})
+    //    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN", "USER"})
     public Item getItemById ( long id ) {
         return itemRepository.findById ( id ).get ();
     }
 
     @Override
-    //    @Secure({"ADMIN", "VENDOR", "SUPER_ADMIN", "USER"})
+    //    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN", "USER"})
     public List<Item> getAllItems () {
         return itemRepository.findAll ();
     }
 
     @Override
-    //    @Secure({"ADMIN", "VENDOR", "SUPER_ADMIN", "USER"})
+    //    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN", "USER"})
     public Item getItemBySKU ( String sku ) {
         return itemRepository.findBySku(sku);
     }
 
     @Override
-    //    @Secure({"ADMIN", "VENDOR", "SUPER_ADMIN"})
+    //    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
     public Item editItem ( long id, Item item ) {
 //        Edit syntax here
         return null;
     }
 
     @Override
-    //    @Secure({"ADMIN", "VENDOR", "SUPER_ADMIN"})
+//    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
     public String deleteItemBySku ( String sku ) {
         itemRepository.deleteBySku ( sku );
         return "Item " + sku + " Deleted successfully";

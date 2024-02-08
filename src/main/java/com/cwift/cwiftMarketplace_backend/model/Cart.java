@@ -20,7 +20,12 @@ public class Cart {
     @OneToMany(cascade = CascadeType.ALL)
     private List<ItemOrder> itemOrders;
     private double totalPrice;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address deliveryAddress;
+    private String specialInstructions;
+    private boolean paid;
 
+    private Date modifiedAt;
     private String cartID = IDGenerator.cartIDGenerator ();
-    private Date dateCreated = new Date ();
+    private Date createdAt = new Date ();
 }

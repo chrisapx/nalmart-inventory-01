@@ -175,4 +175,14 @@ public class IDGenerator {
 
         return sb.toString();
     }
+
+    public static String otpGenerator () {
+        StringBuilder sb = new StringBuilder();  //This code stands for transaction ID
+        Random random = new Random ();
+
+        for (int i = 0; i < 5; i++) {
+            sb.append(random.nextInt(10));
+        }
+        return sb.toString ();
+    }
 }

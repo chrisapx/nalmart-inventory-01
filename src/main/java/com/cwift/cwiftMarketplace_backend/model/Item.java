@@ -37,6 +37,7 @@ public class Item {
     private String Store;
     @Enumerated(EnumType.STRING)
     private Original original;
+    private Type type;
     @Enumerated(EnumType.STRING)
     private Category category;
     @OneToMany(cascade = CascadeType.ALL)
@@ -53,6 +54,7 @@ public class Item {
 //    @JsonIgnore
     @Column(unique = true)
     private String sku = IDGenerator.itemIDGenerator ();
+    @Temporal(TemporalType.DATE)
     private Date dateCreated = new Date ();
 
 }

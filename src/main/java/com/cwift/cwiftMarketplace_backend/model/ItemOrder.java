@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
@@ -21,8 +22,13 @@ public class ItemOrder {
     @OneToOne
     private Item item;
     private int quantity;
+    @NotNull
     private String userID;
     private double totalPrice;
+    private boolean paid;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address deliveryAddress;
+    private String specialInstructions;
 
     private String orderID = IDGenerator.orderIDGenerator ();
     private Date dateCreated = new Date ();

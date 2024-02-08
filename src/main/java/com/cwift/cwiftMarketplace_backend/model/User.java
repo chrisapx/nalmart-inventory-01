@@ -29,12 +29,10 @@ public class User extends Person{
     private String password;
     private boolean verified;
 
-    private double cwiftPayBalance;
-
     @OneToMany(cascade = CascadeType.ALL)
     private List<Role> roles;
 
     private Date modified_at;
-    private String userID = IDGenerator.userIDGenerator ();
+    private final String userID = IDGenerator.userIDGenerator ();
     private Date dateCreated = new Date ();
 }
