@@ -1,10 +1,10 @@
-#FROM ubuntu:latest
-#LABEL authors="christopher"
+FROM ubuntu:latest
+LABEL authors="christopher"
 #
-#ENTRYPOINT ["top", "-b"]
+ENTRYPOINT ["top", "-b"]
 
 # Use JDK 17 base image
-FROM adoptopenjdk:17-jdk-hotspot
+#FROM adoptopenjdk:17-jdk-hotspot
 
 # Set the working directory inside the container
 WORKDIR /app
