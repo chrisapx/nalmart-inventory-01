@@ -14,7 +14,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: 'true'
+#    show-sql: 'true'
 
 #  rabbitmq:
 #    host: localhost
@@ -24,3 +24,21 @@ spring:
   jackson:
     serialization:
       fail-on-empty-beans: 'false'
+
+# Mail properties
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: nalmartinc@gmail.com
+    password: fcogleqrxrlonqys
+
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+
+
+password-encoder: true

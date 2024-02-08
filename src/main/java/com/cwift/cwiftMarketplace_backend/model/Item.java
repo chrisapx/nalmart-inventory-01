@@ -1,13 +1,13 @@
 package com.cwift.cwiftMarketplace_backend.model;
 
 import com.cwift.cwiftMarketplace_backend.utils.IDGenerator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -34,8 +34,10 @@ public class Item {
     private String brand;
     private String serialNumber;
     private long vendorID;
+    private String Store;
     @Enumerated(EnumType.STRING)
     private Original original;
+    private Type type;
     @Enumerated(EnumType.STRING)
     private Category category;
     @OneToMany(cascade = CascadeType.ALL)
@@ -52,5 +54,7 @@ public class Item {
 //    @JsonIgnore
     @Column(unique = true)
     private String sku = IDGenerator.itemIDGenerator ();
+    @Temporal(TemporalType.DATE)
+    private Date dateCreated = new Date ();
 
 }

@@ -1,8 +1,7 @@
 package com.cwift.cwiftMarketplace_backend.model;
 
-public enum SubCategory {
+public enum Type {
 
-    OIL,
-    GAS
-
+    NEW,
+    USED
 }

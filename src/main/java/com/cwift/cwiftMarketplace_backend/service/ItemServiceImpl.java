@@ -1,13 +1,17 @@
 package com.cwift.cwiftMarketplace_backend.service;
 
+import com.cwift.cwiftMarketplace_backend.model.Category;
 import com.cwift.cwiftMarketplace_backend.model.Item;
 import com.cwift.cwiftMarketplace_backend.model.OrderStatus;
 import com.cwift.cwiftMarketplace_backend.repository.ItemRepository;
 import com.cwift.cwiftMarketplace_backend.service.serviceInterfaces.ItemService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -19,46 +23,57 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+//    @Secured({"ADMIN", "VENDOR"})
     public Item addItem ( Item item ) {
         return itemRepository.save ( item );
     }
 
     @Override
+    //    @Secured({"ADMIN", "VENDOR"})
     public List<Item> addManyItems ( List<Item> items ) {
         return itemRepository.saveAll ( items );
     }
 
     @Override
+    //    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN", "USER"})
     public Item getItemById ( long id ) {
         return itemRepository.findById ( id ).get ();
     }
 
     @Override
+    //    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN", "USER"})
     public List<Item> getAllItems () {
         return itemRepository.findAll ();
     }
 
     @Override
+    //    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN", "USER"})
     public Item getItemBySKU ( String sku ) {
         return itemRepository.findBySku(sku);
     }
 
     @Override
+    //    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
     public Item editItem ( long id, Item item ) {
 //        Edit syntax here
         return null;
     }
 
     @Override
+//    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
     public String deleteItemBySku ( String sku ) {
         itemRepository.deleteBySku ( sku );
         return "Item " + sku + " Deleted successfully";
     }
 
     @Override
-    public List<String> getOrderStatusList () {
-        return Arrays.stream( OrderStatus.values () ).map ( Enum::name ).toList ();
+    public List<Category> getCategoryList () {
+        return Arrays.stream( Category.values () ).collect( Collectors.toList());
     }
 
+    @Override
+    public List<String> getSubCategoryList ( Category category ) {
+        return null;
+    }
 
 }
