@@ -82,7 +82,7 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: nalmart-server-001:latest
+          tags: nalmart-server-001
 
       - name: SSH into VPS and deploy  # SSH into the VPS and deploy the application
         uses: appleboy/ssh-action@master
