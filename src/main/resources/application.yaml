@@ -8,7 +8,7 @@ spring:
     #    url: ${DB_URL}/offers
     #    username: ${DB_USERNAME}
     #    password: ${DB_PASSWORD}
-    url: jdbc:mysql://localhost/cwift_market_data
+    url: jdbc:mysql://localhost/nalmart_data1
     username: root
     password: pass
   jpa:
