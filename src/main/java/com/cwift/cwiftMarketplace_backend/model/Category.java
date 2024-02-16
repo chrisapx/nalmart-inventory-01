@@ -1,6 +1,7 @@
 package com.cwift.cwiftMarketplace_backend.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 
 import java.util.List;

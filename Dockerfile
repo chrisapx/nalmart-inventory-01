@@ -1,7 +1,7 @@
-FROM ubuntu:latest
-LABEL authors="christopher"
-#
-ENTRYPOINT ["top", "-b"]
+#FROM ubuntu:latest
+#LABEL authors="christopher"
+##
+#ENTRYPOINT ["top", "-b"]
 
 # Use JDK 17 base image
 #FROM adoptopenjdk:17-jdk-hotspot

@@ -34,6 +34,11 @@ public class ItemController {
         return ResponseEntity.ok (itemServiceImpl.getAllItems ());
     }
 
+    @GetMapping("/names")
+    public ResponseEntity<List<Item>> getAllItemsWithNames(@RequestParam List<String> names){
+        return ResponseEntity.ok (itemServiceImpl.getAllInNames (names));
+    }
+
     @GetMapping("/{itemId}")
     public ResponseEntity<Item> getItemByID( @PathVariable long itemId ){
         return ResponseEntity.ok (itemServiceImpl.getItemById ( itemId ));
