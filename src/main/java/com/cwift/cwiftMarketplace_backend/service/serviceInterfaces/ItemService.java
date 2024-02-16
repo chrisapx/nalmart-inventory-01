@@ -12,6 +12,7 @@ public interface ItemService {
     public List<Item> addManyItems(List<Item> items);
     public Item getItemById(long id);
     public List<Item> getAllItems();
+    public List<Item> getAllInNames(List<String> names);
     public Item getItemBySKU(String sku);
     public Item editItem(long id, Item item);
     public String deleteItemBySku(String sku);

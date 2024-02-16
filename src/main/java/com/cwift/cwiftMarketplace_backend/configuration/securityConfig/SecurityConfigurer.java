@@ -44,7 +44,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
             "/items/**",
             "/users/**",
             "/users/login",
-            "/users/v/{userEmail}/otp"
+            "/users/v/{userEmail}/otp",
+            "/items/names/**"
 
     };
     @Autowired

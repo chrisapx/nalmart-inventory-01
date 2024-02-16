@@ -5,6 +5,7 @@ import com.cwift.cwiftMarketplace_backend.model.Item;
 import com.cwift.cwiftMarketplace_backend.model.OrderStatus;
 import com.cwift.cwiftMarketplace_backend.repository.ItemRepository;
 import com.cwift.cwiftMarketplace_backend.service.serviceInterfaces.ItemService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class ItemServiceImpl implements ItemService {
 
     private final ItemRepository itemRepository;
@@ -25,6 +27,11 @@ public class ItemServiceImpl implements ItemService {
     @Override
 //    @Secured({"ADMIN", "VENDOR"})
     public Item addItem ( Item item ) {
+        if(item.getGlobalPrice () != 0){
+            if(item.getGlobalPrice () >= item.getPrice () ){
+                item.setDiscount ( (item.getGlobalPrice () - item.getPrice () / item.getGlobalPrice ()) * 100 );
+            }
+        }
         return itemRepository.save ( item );
     }
 
@@ -44,6 +51,12 @@ public class ItemServiceImpl implements ItemService {
     //    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN", "USER"})
     public List<Item> getAllItems () {
         return itemRepository.findAll ();
+    }
+
+    @Override
+    public List<Item> getAllInNames ( List<String> names ) {
+        log.info ( "Names searched" );
+        return itemRepository.findByNameIn ( names );
     }
 
     @Override
@@ -68,6 +81,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<Category> getCategoryList () {
+        log.info("Viewed item category list");
         return Arrays.stream( Category.values () ).collect( Collectors.toList());
     }
 

@@ -1,6 +1,7 @@
 package com.cwift.cwiftMarketplace_backend.model;
 
 import com.cwift.cwiftMarketplace_backend.utils.IDGenerator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,14 +20,16 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long itemID;
 
-    @NotNull(message = "Item name must not be null")
+    @NotNull(message = "Item name must not be null and should be unique")
     @Column(unique = true)
     private String name;
     @NotNull(message = "qty must not be null")
     private String qty;
     private String description;
+    private double globalPrice;
     @NotNull(message = "Item price must not be null")
     private double price;
+//    @JsonIgnore
     private double discount;
     @NotNull(message = "Free delivery must not be null")
     private boolean freeDelivery;
