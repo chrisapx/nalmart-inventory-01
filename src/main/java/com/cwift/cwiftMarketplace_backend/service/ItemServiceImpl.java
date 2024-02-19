@@ -29,7 +29,7 @@ public class ItemServiceImpl implements ItemService {
     public Item addItem ( Item item ) {
         if(item.getGlobalPrice () != 0){
             if(item.getGlobalPrice () >= item.getPrice () ){
-                item.setDiscount ( (item.getGlobalPrice () - item.getPrice () / item.getGlobalPrice ()) * 100 );
+                item.setDiscount ( ((item.getGlobalPrice () - item.getPrice ()) / item.getGlobalPrice ()) * 100 );
             }
         }
         return itemRepository.save ( item );

@@ -19,8 +19,8 @@ public class ItemOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne
-    private Item item;
+//    @OneToOne(cascade = CascadeType.ALL)
+    private String itemID;
     private int quantity;
     @NotNull
     private String userID;
