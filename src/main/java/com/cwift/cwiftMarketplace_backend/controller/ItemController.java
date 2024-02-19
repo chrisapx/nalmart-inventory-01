@@ -24,7 +24,7 @@ public class ItemController {
         return ResponseEntity.ok (itemServiceImpl.addItem ( item ));
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<List<Item>> addManyItem( @RequestBody List<Item> items ){
         return ResponseEntity.ok (itemServiceImpl.addManyItems ( items ));
     }

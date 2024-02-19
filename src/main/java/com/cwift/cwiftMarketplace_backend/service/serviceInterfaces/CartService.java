@@ -7,10 +7,11 @@ import java.util.List;
 
 public interface CartService {
 
-    public Cart createCart( Cart cart);
-    public Cart getCart(String cartID);
-    public List<Cart> getAllCarts();
-    public String deleteCart(String cartID);
-    public Cart editCart(String cartID, Cart cart);
+    Cart createCart ( Cart cart );
+    Cart addToCart ( String cartID, ItemOrder itemOrder );
+    Cart getCart ( String cartID );
+    List<Cart> getAllCarts ();
+    String deleteCart ( String cartID );
+    Cart editCart ( String cartID, Cart cart );
 
 }

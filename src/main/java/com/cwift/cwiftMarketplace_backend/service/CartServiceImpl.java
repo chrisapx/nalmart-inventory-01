@@ -1,7 +1,9 @@
 package com.cwift.cwiftMarketplace_backend.service;
 
 import com.cwift.cwiftMarketplace_backend.model.Cart;
+import com.cwift.cwiftMarketplace_backend.model.ItemOrder;
 import com.cwift.cwiftMarketplace_backend.repository.CartRepository;
+import com.cwift.cwiftMarketplace_backend.repository.ItemRepository;
 import com.cwift.cwiftMarketplace_backend.service.serviceInterfaces.CartService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -13,14 +15,45 @@ import java.util.List;
 public class CartServiceImpl implements CartService {
 
     private final CartRepository cartRepository;
+    private final ItemRepository itemRepository;
+    private final EmailSenderServiceimpl emailSenderServiceimpl;
 
-    public CartServiceImpl ( CartRepository cartRepository ) {
+    public CartServiceImpl ( CartRepository cartRepository, ItemRepository itemRepository, EmailSenderServiceimpl emailSenderServiceimpl ) {
         this.cartRepository = cartRepository;
+        this.itemRepository = itemRepository;
+        this.emailSenderServiceimpl = emailSenderServiceimpl;
     }
 
     @Override
     public Cart createCart ( Cart cart ) {
-        return cartRepository.save ( cart );
+        try{
+
+            emailSenderServiceimpl.sendEmail ( cart.getUserEmail (), "Order Created Successfully", "Hello ,\n\n " +
+                    "Your order has been created successfully with items \n" +
+                    cart.getItemOrders ().stream ().map ( order -> itemRepository.findByItemID ( order.getItemID () ).getName ().concat ( " ( " +order.getQuantity () + " )" ) ).toList () +
+                    "\n With total price " + cart.getTotalPrice () + "\n\n" +
+                    "Thank you for trusting us with your needs"
+            );
+            return cartRepository.save ( cart );
+        }
+        catch ( Exception e ) {
+            throw new RuntimeException ( e );
+        }
+
+    }
+
+    @Override
+    public Cart addToCart ( String cartID, ItemOrder itemOrder ) {
+        try{
+            Cart cart = cartRepository.findByCartID ( cartID );
+            if(cart.getCreatedAt () != null){
+                cart.getItemOrders ().add ( itemOrder );
+            }
+            return cartRepository.save ( cart );
+        }
+        catch ( Exception e ) {
+            throw new RuntimeException ( e );
+        }
     }
 
     @Override

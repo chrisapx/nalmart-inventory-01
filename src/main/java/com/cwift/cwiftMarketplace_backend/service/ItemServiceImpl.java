@@ -2,14 +2,11 @@ package com.cwift.cwiftMarketplace_backend.service;
 
 import com.cwift.cwiftMarketplace_backend.model.Category;
 import com.cwift.cwiftMarketplace_backend.model.Item;
-import com.cwift.cwiftMarketplace_backend.model.OrderStatus;
 import com.cwift.cwiftMarketplace_backend.repository.ItemRepository;
 import com.cwift.cwiftMarketplace_backend.service.serviceInterfaces.ItemService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
