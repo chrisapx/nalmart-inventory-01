@@ -27,6 +27,7 @@ public class Cart {
     private boolean paid;
     @Column(unique = true)
     private String userID;
+    private String userEmail;
 
     private Date modifiedAt;
     @Column(unique = true)
