@@ -39,6 +39,7 @@ public class Item {
     private long vendorID;
     private String Store;
     private boolean approved;
+    private String whatIsInTheBox;
     @Enumerated(EnumType.STRING)
     private Original original;
     private Type type;

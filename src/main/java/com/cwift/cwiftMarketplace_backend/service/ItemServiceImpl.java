@@ -5,6 +5,7 @@ import com.cwift.cwiftMarketplace_backend.model.Item;
 import com.cwift.cwiftMarketplace_backend.repository.ItemRepository;
 import com.cwift.cwiftMarketplace_backend.service.serviceInterfaces.ItemService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -60,6 +61,33 @@ public class ItemServiceImpl implements ItemService {
     //    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN", "USER"})
     public Item getItemBySKU ( String sku ) {
         return itemRepository.findBySku(sku);
+    }
+
+    @Override
+    public Item editItemDescriptionOrWhatIsInTheBox ( String sku, Item newItem ) {
+        try{
+            Item oldItem = itemRepository.findBySku ( sku );
+            if (newItem.getDescription () != null) oldItem.setDescription ( newItem.getDescription () );
+            if (newItem.getWhatIsInTheBox () != null) oldItem.setWhatIsInTheBox ( newItem.getWhatIsInTheBox () );
+
+            return itemRepository.save ( oldItem );
+        }
+        catch ( Exception e ) {
+            throw new RuntimeException ( e );
+        }
+    }
+
+    @Override
+    @Secured ({"ADMIN", "SUPER_ADMIN"})
+    public Item approveItem ( String sku ) {
+        try{
+            Item oldItem = itemRepository.findBySku ( sku );
+            oldItem.setApproved ( true );
+            return itemRepository.save ( oldItem );
+        }
+        catch ( Exception e ) {
+            throw new RuntimeException ( e );
+        }
     }
 
     @Override
