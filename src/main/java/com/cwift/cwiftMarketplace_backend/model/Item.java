@@ -38,6 +38,7 @@ public class Item {
     private String serialNumber;
     private long vendorID;
     private String Store;
+    private boolean approved;
     @Enumerated(EnumType.STRING)
     private Original original;
     private Type type;
