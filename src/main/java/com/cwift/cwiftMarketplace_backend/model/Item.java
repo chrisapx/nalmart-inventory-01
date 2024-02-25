@@ -25,6 +25,7 @@ public class Item {
     private String name;
     @NotNull(message = "qty must not be null")
     private String qty;
+    @Column(length = 1000)
     private String description;
     private double globalPrice;
     @NotNull(message = "Item price must not be null")
@@ -38,6 +39,8 @@ public class Item {
     private String serialNumber;
     private long vendorID;
     private String Store;
+    private boolean approved;
+    private String whatIsInTheBox;
     @Enumerated(EnumType.STRING)
     private Original original;
     private Type type;

@@ -24,7 +24,7 @@ public class ItemController {
         return ResponseEntity.ok (itemServiceImpl.addItem ( item ));
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<List<Item>> addManyItem( @RequestBody List<Item> items ){
         return ResponseEntity.ok (itemServiceImpl.addManyItems ( items ));
     }
@@ -58,6 +58,12 @@ public class ItemController {
     public ResponseEntity<String> deleteItemBySku( @RequestParam String sku ){
         return ResponseEntity.ok (itemServiceImpl.deleteItemBySku ( sku ));
     }
+
+    @DeleteMapping("/{itemID}")
+    public ResponseEntity<String> deleteItemByItemID( @PathVariable long itemID ){
+        return ResponseEntity.ok (itemServiceImpl.deleteItemByItemID ( itemID ));
+    }
+
 
     @GetMapping("/categories")
     public ResponseEntity<List<Category>> getItemCategoryList(  ){

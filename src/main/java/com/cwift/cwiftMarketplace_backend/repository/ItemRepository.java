@@ -7,7 +7,10 @@ import java.util.List;
 
 public interface ItemRepository extends JpaRepository<Item, Long> {
     Item findBySku ( String sku );
+    Item findByItemID (long itemID);
 
-    String deleteBySku ( String sku );
+    void deleteBySku ( String sku );
     List<Item> findByNameIn(List<String> names);
+
+    void deleteByItemID ( long itmID );
 }

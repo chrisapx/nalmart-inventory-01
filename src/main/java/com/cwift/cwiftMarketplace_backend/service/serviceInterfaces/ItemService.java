@@ -14,8 +14,17 @@ public interface ItemService {
     public List<Item> getAllItems();
     public List<Item> getAllInNames(List<String> names);
     public Item getItemBySKU(String sku);
-    public Item editItem(long id, Item item);
+
+    Item editItemDescriptionOrWhatIsInTheBox ( String sku, Item item );
+
+    //    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
+    Item approveItem ( String sku );
+
+    public Item editItem( long id, Item item);
     public String deleteItemBySku(String sku);
+
+    //    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
+    String deleteItemByItemID ( long itmID );
 
     public List<Category> getCategoryList();
     public List<String> getSubCategoryList(Category category);

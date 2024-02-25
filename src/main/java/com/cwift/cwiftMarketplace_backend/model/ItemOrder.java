@@ -19,16 +19,12 @@ public class ItemOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne
-    private Item item;
+    private long itemID;
     private int quantity;
-    @NotNull
     private String userID;
-    private double totalPrice;
-    private boolean paid;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Address deliveryAddress;
     private String specialInstructions;
+    private Date dateModified;
+    private OrderStatus orderStatus;
 
     private String orderID = IDGenerator.orderIDGenerator ();
     private Date dateCreated = new Date ();

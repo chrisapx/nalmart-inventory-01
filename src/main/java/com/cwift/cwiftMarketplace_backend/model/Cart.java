@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,9 +24,13 @@ public class Cart {
     @OneToOne(cascade = CascadeType.ALL)
     private Address deliveryAddress;
     private String specialInstructions;
-    private boolean paid;
+    private PaymentStatus paymentStatus;
+    @Column(unique = true)
+    private String userID;
+    private String userEmail;
 
     private Date modifiedAt;
+    @Column(unique = true)
     private String cartID = IDGenerator.cartIDGenerator ();
     private Date createdAt = new Date ();
 }
