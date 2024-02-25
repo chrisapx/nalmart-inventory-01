@@ -23,6 +23,9 @@ public interface ItemService {
     public Item editItem( long id, Item item);
     public String deleteItemBySku(String sku);
 
+    //    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
+    String deleteItemByItemID ( long itmID );
+
     public List<Category> getCategoryList();
     public List<String> getSubCategoryList(Category category);
 }

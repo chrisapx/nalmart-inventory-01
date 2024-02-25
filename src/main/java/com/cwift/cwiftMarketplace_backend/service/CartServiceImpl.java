@@ -27,19 +27,30 @@ public class CartServiceImpl implements CartService {
     @Override
     public Cart createCart ( Cart cart ) {
         try{
+            Cart cart1 = cartRepository.findByUserID(cart.getUserID ());
 
-            emailSenderServiceimpl.sendEmail ( cart.getUserEmail (), "Order Created Successfully", "Hello ,\n\n " +
-                    "Your order has been created successfully with items \n" +
-                    cart.getItemOrders ().stream ().map ( order -> itemRepository.findByItemID ( order.getItemID () ).getName ().concat ( " ( " +order.getQuantity () + " )" ) ).toList () +
-                    "\n With total price " + cart.getTotalPrice () + "\n\n" +
-                    "Thank you for trusting us with your needs"
-            );
-            return cartRepository.save ( cart );
+            if(cart1 == null){
+                emailSenderServiceimpl.sendEmail ( cart.getUserEmail (), "Order Created Successfully", "Hello ,\n\n " +
+                        "Your order has been created successfully with items \n" +
+                        cart.getItemOrders ().stream ().map ( order -> itemRepository.findByItemID ( order.getItemID () ).getName ().concat ( " ( " +order.getQuantity () + " )" ) ).toList () +
+                        "\n With total price " + cart.getTotalPrice () + "\n\n" +
+                        "Thank you for trusting us with your needs"
+                );
+                return cartRepository.save ( cart );
+            }else {
+                emailSenderServiceimpl.sendEmail ( cart.getUserEmail (), "Order Created Successfully", "Hello ,\n\n " +
+                        "Your order has been created successfully with items \n" +
+                        cart.getItemOrders ().stream ().map ( order -> itemRepository.findByItemID ( order.getItemID () ).getName ().concat ( " ( " +order.getQuantity () + " )" ) ).toList () +
+                        "\n With total price " + cart.getTotalPrice () + "\n\n" +
+                        "Thank you for trusting us with your needs"
+                );
+                cart1.getItemOrders ().addAll ( cart.getItemOrders () );
+                return cartRepository.save ( cart1 );
+            }
         }
         catch ( Exception e ) {
             throw new RuntimeException ( e );
         }
-
     }
 
     @Override

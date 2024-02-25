@@ -59,6 +59,12 @@ public class ItemController {
         return ResponseEntity.ok (itemServiceImpl.deleteItemBySku ( sku ));
     }
 
+    @DeleteMapping("/{itemID}")
+    public ResponseEntity<String> deleteItemByItemID( @PathVariable long itemID ){
+        return ResponseEntity.ok (itemServiceImpl.deleteItemByItemID ( itemID ));
+    }
+
+
     @GetMapping("/categories")
     public ResponseEntity<List<Category>> getItemCategoryList(  ){
         return ResponseEntity.ok (itemServiceImpl.getCategoryList ( ));

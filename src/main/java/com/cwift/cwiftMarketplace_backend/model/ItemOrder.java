@@ -19,10 +19,12 @@ public class ItemOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String itemID;
+    private long itemID;
     private int quantity;
+    private String userID;
     private String specialInstructions;
     private Date dateModified;
+    private OrderStatus orderStatus;
 
     private String orderID = IDGenerator.orderIDGenerator ();
     private Date dateCreated = new Date ();

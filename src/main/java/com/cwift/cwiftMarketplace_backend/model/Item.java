@@ -25,6 +25,7 @@ public class Item {
     private String name;
     @NotNull(message = "qty must not be null")
     private String qty;
+    @Column(length = 1000)
     private String description;
     private double globalPrice;
     @NotNull(message = "Item price must not be null")

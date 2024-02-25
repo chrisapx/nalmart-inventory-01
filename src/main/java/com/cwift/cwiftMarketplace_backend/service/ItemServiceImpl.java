@@ -7,6 +7,7 @@ import com.cwift.cwiftMarketplace_backend.service.serviceInterfaces.ItemService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
@@ -98,10 +99,19 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    @Transactional
 //    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
     public String deleteItemBySku ( String sku ) {
         itemRepository.deleteBySku ( sku );
         return "Item " + sku + " Deleted successfully";
+    }
+
+    @Override
+    @Transactional
+//    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
+    public String deleteItemByItemID ( long itmID ) {
+        itemRepository.deleteByItemID ( itmID );
+        return "Item " + itmID + " Deleted successfully";
     }
 
     @Override

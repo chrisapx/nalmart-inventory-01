@@ -24,7 +24,7 @@ public class Cart {
     @OneToOne(cascade = CascadeType.ALL)
     private Address deliveryAddress;
     private String specialInstructions;
-    private boolean paid;
+    private PaymentStatus paymentStatus;
     @Column(unique = true)
     private String userID;
     private String userEmail;
