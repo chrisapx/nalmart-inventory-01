@@ -20,7 +20,7 @@ public interface ItemService {
     //    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
     Item approveItem ( String sku );
 
-    public Item editItem( long id, Item item);
+    public Item editItem( long id, Item item) throws Exception;
     public String deleteItemBySku(String sku);
 
     //    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})

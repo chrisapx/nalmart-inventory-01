@@ -4,12 +4,14 @@ import com.cwift.cwiftMarketplace_backend.model.Category;
 import com.cwift.cwiftMarketplace_backend.model.Item;
 import com.cwift.cwiftMarketplace_backend.repository.ItemRepository;
 import com.cwift.cwiftMarketplace_backend.service.serviceInterfaces.ItemService;
+import com.cwift.cwiftMarketplace_backend.utils.UpdateHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,9 +20,11 @@ import java.util.stream.Collectors;
 public class ItemServiceImpl implements ItemService {
 
     private final ItemRepository itemRepository;
+    private final UpdateHelper updateHelper;
 
-    public ItemServiceImpl ( ItemRepository itemRepository ) {
+    public ItemServiceImpl ( ItemRepository itemRepository, UpdateHelper updateHelper ) {
         this.itemRepository = itemRepository;
+        this.updateHelper = updateHelper;
     }
 
     @Override
@@ -93,9 +97,22 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     //    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
-    public Item editItem ( long id, Item item ) {
-//        Edit syntax here
-        return null;
+    public Item editItem(long itemID, Item newItemAttributes) throws Exception {
+        try {
+            Item oldItem = itemRepository.findByItemID(itemID);
+            if (oldItem != null) {
+                newItemAttributes.setItemID ( oldItem.getItemID () );
+                newItemAttributes.setSku ( oldItem.getSku () );
+                newItemAttributes.setDateCreated ( oldItem.getDateCreated () );
+                updateHelper.mergeObjects(oldItem, newItemAttributes);
+                oldItem.setDateModified ( new Date () );
+                return itemRepository.save(oldItem);
+            } else {
+                throw new Exception ("Item with ID " + itemID + " not found");
+            }
+        } catch (Exception e) {
+            throw new Exception ( e + "Item with ID " + itemID + " not found");
+        }
     }
 
     @Override
