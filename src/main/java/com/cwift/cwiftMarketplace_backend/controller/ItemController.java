@@ -49,9 +49,9 @@ public class ItemController {
         return ResponseEntity.ok (itemServiceImpl.getItemBySKU ( sku ));
     }
 
-    @PutMapping("/{itemId}")
-    public ResponseEntity<Item> editItem( @RequestParam long itemId, @RequestBody Item item ){
-        return ResponseEntity.ok (itemServiceImpl.editItem ( itemId, item ));
+    @PutMapping("/update")
+    public ResponseEntity<Item> editItem( @RequestParam long itemID, @RequestBody Item item ) throws Exception {
+        return ResponseEntity.ok (itemServiceImpl.editItem ( itemID, item ));
     }
 
     @DeleteMapping

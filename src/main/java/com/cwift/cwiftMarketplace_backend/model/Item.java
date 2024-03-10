@@ -62,5 +62,6 @@ public class Item {
     private String sku = IDGenerator.itemIDGenerator ();
     @Temporal(TemporalType.DATE)
     private Date dateCreated = new Date ();
+    private Date dateModified;
 
 }
