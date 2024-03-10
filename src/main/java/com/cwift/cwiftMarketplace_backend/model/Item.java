@@ -46,6 +46,7 @@ public class Item {
     private Type type;
     @Enumerated(EnumType.STRING)
     private Category category;
+    private String subCategory;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Details> details;
     @OneToMany(cascade = CascadeType.ALL)
