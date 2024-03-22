@@ -166,6 +166,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserByUsernameOrEmailOrPhone ( String username ) {
+        log.info ( "User accessed: " +username );
+        return userRepository.findByUsernameOrEmailOrPhone ( username, username, username );
+    }
+
+    @Override
     public List<User> getAllUsers () {
         return userRepository.findAll ();
     }

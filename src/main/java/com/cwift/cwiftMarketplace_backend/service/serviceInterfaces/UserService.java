@@ -14,6 +14,9 @@ public interface UserService {
     public boolean verifyAccount(String userEmail, String otp);
     public String addRolesToUser( String username, RoleName roleName );
     public User getUserByID(long id);
+
+    User getUserByUsernameOrEmailOrPhone ( String username );
+
     public List<User> getAllUsers();
     public User editUser(long id, User user);
     public String deleteUser(long id);

@@ -57,6 +57,11 @@ public class UserController {
         return ResponseEntity.ok (userService.getUserByID ( id ));
     }
 
+    @GetMapping("/user/{username}")
+    public ResponseEntity<User> getUserByUsernameOrEmailOrPhone( @PathVariable String username ){
+        return ResponseEntity.ok (userService.getUserByUsernameOrEmailOrPhone ( username ));
+    }
+
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers(){
         return ResponseEntity.ok (userService.getAllUsers ());
