@@ -27,6 +27,11 @@ public class UserController {
         return ResponseEntity.ok (userService.createUser ( user ));
     }
 
+    @PostMapping("/u1")
+    public ResponseEntity<User> createAdminAccount( @RequestBody User user ){
+        return ResponseEntity.ok (userService.createUser ( user ));
+    }
+
     @PutMapping("/v/{userEmail}")
     public ResponseEntity<Boolean> verifyAccount( @PathVariable String userEmail, @RequestParam String otp ){
         return ResponseEntity.ok (userService.verifyAccount ( userEmail, otp ));

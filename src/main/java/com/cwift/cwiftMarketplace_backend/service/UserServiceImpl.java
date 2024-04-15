@@ -46,6 +46,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Secured({"ADMIN", "SUPER_ADMIN"})
     public User createUser(User user) {
         try {
             user.setRoles(List.of(Role.builder().roleName(RoleName.USER).build()));
@@ -148,6 +149,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Secured({"ADMIN", "USER", "SUPER_ADMIN"})
     public String addRolesToUser ( String username, RoleName roleName ) {
         try{
             User user = userRepository.findByUsername( username ).get ();

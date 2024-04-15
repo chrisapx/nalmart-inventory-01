@@ -33,7 +33,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    @Secured({"ADMIN", "VENDOR"})
+    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
     public Item addItem ( Item item ) {
         if(item.getGlobalPrice () != 0){
             if(item.getGlobalPrice () >= item.getPrice () ){
@@ -45,19 +45,17 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    @Secured({"ADMIN", "VENDOR"})
+    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
     public List<Item> addManyItems ( List<Item> items ) {
         return itemRepository.saveAll ( items );
     }
 
     @Override
-    //    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN", "USER"})
     public Item getItemById ( long id ) {
         return itemRepository.findById ( id ).get ();
     }
 
     @Override
-    //    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN", "USER"})
     public List<Item> getAllItems () {
         return itemRepository.findAll ();
     }
@@ -69,12 +67,12 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    //    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN", "USER"})
     public Item getItemBySKU ( String sku ) {
         return itemRepository.findBySku(sku);
     }
 
     @Override
+    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
     public Item editItemDescriptionOrWhatIsInTheBox ( String sku, Item newItem ) {
         try{
             Item oldItem = itemRepository.findBySku ( sku );
@@ -89,7 +87,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    @Secured ({"ADMIN", "SUPER_ADMIN"})
+    @Secured ({"ADMIN", "SUPER_ADMIN", "VENDOR"})
     public Item approveItem ( String sku ) {
         try{
             Item oldItem = itemRepository.findBySku ( sku );
@@ -102,7 +100,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    //    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
+    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
     public Item editItem(long itemID, Item newItemAttributes) throws Exception {
         try {
             Item oldItem = itemRepository.findByItemID(itemID);
@@ -123,7 +121,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     @Transactional
-//    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
+    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
     public String deleteItemBySku ( String sku ) {
         itemRepository.deleteBySku ( sku );
         return "Item " + sku + " Deleted successfully";
@@ -131,36 +129,41 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     @Transactional
-//    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
+    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
     public String deleteItemByItemID ( long itmID ) {
         itemRepository.deleteByItemID ( itmID );
         return "Item " + itmID + " Deleted successfully";
     }
 
     @Override
+    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
     public Category addCategory ( Category category ) {
         log.info ( "Adding category " + category.getName () );
         return categoryRepository.save ( category );
     }
 
     @Override
+    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
     public SubCategory addSubCategory ( SubCategory subCategory ) {
         log.info ( "Adding sub category " + subCategory.getName () );
         return subCategoryRepository.save ( subCategory );
     }
 
     @Override
+    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
     public List<Category> getCategoryList () {
         log.info("Viewed item category list");
         return categoryRepository.findAll ();
     }
 
     @Override
+    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
     public List<SubCategory> getSubCategoryList ( long categoryID ) {
         return subCategoryRepository.findAllByParentID(categoryID);
     }
 
     @Override
+    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
     public List<SubCategory> getAllSubCategories (  ) {
         return subCategoryRepository.findAll ();
     }

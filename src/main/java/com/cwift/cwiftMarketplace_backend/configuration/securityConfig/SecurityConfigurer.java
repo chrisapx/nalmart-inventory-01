@@ -37,12 +37,9 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
             "/swagger-ui/**",
 
             // -- white listed endpoints
-            "/users/auth",
             "/users/us1",
             "/users/cfm",
             "/items",
-            "/items/**",
-            "/users/**",
             "/users/login",
             "/users/v/{userEmail}/otp",
             "/items/names/**",
