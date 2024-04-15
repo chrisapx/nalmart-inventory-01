@@ -2,7 +2,10 @@ package com.cwift.cwiftMarketplace_backend.service;
 
 import com.cwift.cwiftMarketplace_backend.model.Category;
 import com.cwift.cwiftMarketplace_backend.model.Item;
+import com.cwift.cwiftMarketplace_backend.model.SubCategory;
+import com.cwift.cwiftMarketplace_backend.repository.CategoryRepository;
 import com.cwift.cwiftMarketplace_backend.repository.ItemRepository;
+import com.cwift.cwiftMarketplace_backend.repository.SubCategoryRepository;
 import com.cwift.cwiftMarketplace_backend.service.serviceInterfaces.ItemService;
 import com.cwift.cwiftMarketplace_backend.utils.UpdateHelper;
 import lombok.extern.slf4j.Slf4j;
@@ -10,10 +13,8 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -21,25 +22,30 @@ public class ItemServiceImpl implements ItemService {
 
     private final ItemRepository itemRepository;
     private final UpdateHelper updateHelper;
+    private final CategoryRepository categoryRepository;
+    private final SubCategoryRepository subCategoryRepository;
 
-    public ItemServiceImpl ( ItemRepository itemRepository, UpdateHelper updateHelper ) {
+    public ItemServiceImpl ( ItemRepository itemRepository, UpdateHelper updateHelper, CategoryRepository categoryRepository, SubCategoryRepository subCategoryRepository ) {
         this.itemRepository = itemRepository;
         this.updateHelper = updateHelper;
+        this.categoryRepository = categoryRepository;
+        this.subCategoryRepository = subCategoryRepository;
     }
 
     @Override
-//    @Secured({"ADMIN", "VENDOR"})
+    @Secured({"ADMIN", "VENDOR"})
     public Item addItem ( Item item ) {
         if(item.getGlobalPrice () != 0){
             if(item.getGlobalPrice () >= item.getPrice () ){
                 item.setDiscount ( ((item.getGlobalPrice () - item.getPrice ()) / item.getGlobalPrice ()) * 100 );
             }
         }
+        log.info ( "Item added with name: " + item.getDisplayName () );
         return itemRepository.save ( item );
     }
 
     @Override
-    //    @Secured({"ADMIN", "VENDOR"})
+    @Secured({"ADMIN", "VENDOR"})
     public List<Item> addManyItems ( List<Item> items ) {
         return itemRepository.saveAll ( items );
     }
@@ -132,14 +138,31 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<Category> getCategoryList () {
-        log.info("Viewed item category list");
-        return Arrays.stream( Category.values () ).collect( Collectors.toList());
+    public Category addCategory ( Category category ) {
+        log.info ( "Adding category " + category.getName () );
+        return categoryRepository.save ( category );
     }
 
     @Override
-    public List<String> getSubCategoryList ( Category category ) {
-        return null;
+    public SubCategory addSubCategory ( SubCategory subCategory ) {
+        log.info ( "Adding sub category " + subCategory.getName () );
+        return subCategoryRepository.save ( subCategory );
+    }
+
+    @Override
+    public List<Category> getCategoryList () {
+        log.info("Viewed item category list");
+        return categoryRepository.findAll ();
+    }
+
+    @Override
+    public List<SubCategory> getSubCategoryList ( long categoryID ) {
+        return subCategoryRepository.findAllByParentID(categoryID);
+    }
+
+    @Override
+    public List<SubCategory> getAllSubCategories (  ) {
+        return subCategoryRepository.findAll ();
     }
 
 }

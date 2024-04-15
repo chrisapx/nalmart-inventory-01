@@ -10,6 +10,7 @@ import com.cwift.cwiftMarketplace_backend.repository.UserRepository;
 import com.cwift.cwiftMarketplace_backend.service.serviceInterfaces.UserService;
 import com.cwift.cwiftMarketplace_backend.utils.IDGenerator;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -166,6 +167,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+//    @Secured ({ "USER","ADMIN" })
     public User getUserByUsernameOrEmailOrPhone ( String username ) {
         log.info ( "User accessed: " +username );
         return userRepository.findByUsernameOrEmailOrPhone ( username, username, username );

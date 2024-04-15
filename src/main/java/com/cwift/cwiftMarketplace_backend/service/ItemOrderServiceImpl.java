@@ -4,6 +4,7 @@ import com.cwift.cwiftMarketplace_backend.model.ItemOrder;
 import com.cwift.cwiftMarketplace_backend.model.OrderStatus;
 import com.cwift.cwiftMarketplace_backend.repository.ItemOrderRepository;
 import com.cwift.cwiftMarketplace_backend.service.serviceInterfaces.ItemOrderService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -50,7 +51,7 @@ public class ItemOrderServiceImpl implements ItemOrderService {
     }
 
     @Override
-    //    @Secure({"ADMIN", "VENDOR", "SUPER_ADMIN", "USER"})
+    @Secured ({"ADMIN", "VENDOR", "SUPER_ADMIN", "USER"})
     public List<String> getOrderStatusList () {
         return Arrays.stream( OrderStatus.values () ).map ( Enum::name ).collect( Collectors.toList());
     }

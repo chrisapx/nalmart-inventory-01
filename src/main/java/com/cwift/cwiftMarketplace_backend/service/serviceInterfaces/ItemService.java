@@ -26,6 +26,11 @@ public interface ItemService {
     //    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
     String deleteItemByItemID ( long itmID );
 
+    public Category addCategory(Category category);
+    public SubCategory addSubCategory(SubCategory subCategory);
     public List<Category> getCategoryList();
-    public List<String> getSubCategoryList(Category category);
+
+    List<SubCategory> getSubCategoryList ( long categoryID );
+
+    List<SubCategory> getAllSubCategories ();
 }
