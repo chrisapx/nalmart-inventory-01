@@ -2,6 +2,7 @@ package com.cwift.cwiftMarketplace_backend.controller;
 
 import com.cwift.cwiftMarketplace_backend.model.Category;
 import com.cwift.cwiftMarketplace_backend.model.Item;
+import com.cwift.cwiftMarketplace_backend.model.SubCategory;
 import com.cwift.cwiftMarketplace_backend.service.ItemServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -62,12 +63,6 @@ public class ItemController {
     @DeleteMapping("/{itemID}")
     public ResponseEntity<String> deleteItemByItemID( @PathVariable long itemID ){
         return ResponseEntity.ok (itemServiceImpl.deleteItemByItemID ( itemID ));
-    }
-
-
-    @GetMapping("/categories")
-    public ResponseEntity<List<Category>> getItemCategoryList(  ){
-        return ResponseEntity.ok (itemServiceImpl.getCategoryList ( ));
     }
 
 }

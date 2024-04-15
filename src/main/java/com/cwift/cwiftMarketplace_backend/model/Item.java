@@ -23,6 +23,9 @@ public class Item {
     @NotNull(message = "Item name must not be null and should be unique")
     @Column(unique = true)
     private String name;
+    @NotNull(message = "Item name must not be null and should be unique")
+    @Column(unique = true)
+    private String displayName;
     @NotNull(message = "qty must not be null")
     private String qty;
     @Column(length = 1000)
@@ -41,11 +44,8 @@ public class Item {
     private String Store;
     private boolean approved;
     private String whatIsInTheBox;
-    @Enumerated(EnumType.STRING)
-    private Original original;
     private Type type;
-    @Enumerated(EnumType.STRING)
-    private Category category;
+    private String category;
     private String subCategory;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Details> details;
@@ -58,7 +58,6 @@ public class Item {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Review> reviews;
 
-//    @JsonIgnore
     @Column(unique = true)
     private String sku = IDGenerator.itemIDGenerator ();
     @Temporal(TemporalType.DATE)

@@ -20,9 +20,12 @@ public class ItemOrder {
     private long id;
 
     private long itemID;
-    private int quantity;
+    private String cartID;
     private String userID;
+    private int quantity;
     private String specialInstructions;
+
+    private Date deliveryDate;
     private Date dateModified;
     private OrderStatus orderStatus;
 
