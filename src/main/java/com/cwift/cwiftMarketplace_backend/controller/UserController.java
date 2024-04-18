@@ -2,7 +2,6 @@ package com.cwift.cwiftMarketplace_backend.controller;
 
 import com.cwift.cwiftMarketplace_backend.configuration.securityConfig.AuthenticationRequest;
 import com.cwift.cwiftMarketplace_backend.configuration.securityConfig.AuthenticationResponse;
-import com.cwift.cwiftMarketplace_backend.model.Item;
 import com.cwift.cwiftMarketplace_backend.model.RoleName;
 import com.cwift.cwiftMarketplace_backend.model.User;
 import com.cwift.cwiftMarketplace_backend.service.UserServiceImpl;
