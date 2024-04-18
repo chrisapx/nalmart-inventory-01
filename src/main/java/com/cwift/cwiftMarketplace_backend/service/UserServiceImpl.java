@@ -46,7 +46,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Secured({"ADMIN", "SUPER_ADMIN"})
     public User createUser(User user) {
         try {
             user.setRoles(List.of(Role.builder().roleName(RoleName.USER).build()));
@@ -151,6 +150,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Secured({"ADMIN", "USER", "SUPER_ADMIN"})
     public String addRolesToUser ( String username, RoleName roleName ) {
+        log.info ( "Adding role {} to {}", roleName, username );
         try{
             User user = userRepository.findByUsername( username ).get ();
             user.getRoles ().add ( Role.builder ().roleName ( roleName ).build () );
@@ -169,13 +169,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-//    @Secured ({ "USER","ADMIN" })
+    @Secured ({ "USER","ADMIN" })
     public User getUserByUsernameOrEmailOrPhone ( String username ) {
         log.info ( "User accessed: " +username );
         return userRepository.findByUsernameOrEmailOrPhone ( username, username, username );
     }
 
     @Override
+    @Secured ({ "SUPER_ADMIN","ADMIN" })
     public List<User> getAllUsers () {
         return userRepository.findAll ();
     }

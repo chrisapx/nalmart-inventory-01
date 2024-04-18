@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -37,11 +38,11 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
             "/swagger-ui/**",
 
             // -- white listed endpoints
-            "/users/us1",
-            "/users/cfm",
-            "/items",
+            "/users/u1",
             "/users/login",
-            "/users/v/{userEmail}/otp",
+//            "/users/role",
+            "/items",
+            "/users/v/**",
             "/items/names/**",
             "/categories/**"
 
@@ -67,7 +68,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
-        http.csrf().disable()
+        http.csrf().disable ()
+                .cors ( Customizer.withDefaults ())
                 .authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll()
                 .anyRequest().authenticated()
         .and().sessionManagement()
