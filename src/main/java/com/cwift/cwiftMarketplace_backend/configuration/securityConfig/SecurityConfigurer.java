@@ -43,6 +43,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
             "/users/login",
 //            "/users/role",
             "/items",
+            "/items/**",
             "/users/v/**",
             "/items/names/**",
             "/categories/**"
