@@ -24,4 +24,6 @@ public interface UserService {
     List<String> getAllRoleNames ();
 
     Boolean sendNewOtp ( String userEmail );
+
+    User createAdminUser ( User user );
 }
