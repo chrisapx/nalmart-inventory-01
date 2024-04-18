@@ -39,6 +39,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
             // -- white listed endpoints
             "/users/u1",
+            "/users/admin",
             "/users/login",
 //            "/users/role",
             "/items",

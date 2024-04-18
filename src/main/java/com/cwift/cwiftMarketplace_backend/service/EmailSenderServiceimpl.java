@@ -34,16 +34,21 @@ public class EmailSenderServiceimpl implements EmailSenderService {
             MimeMessageHelper helper = new MimeMessageHelper(mail);
 
             helper.setTo(to);
-            helper.setFrom("nzuri.mail@gmail.com", "Nalmart Support");
+            helper.setFrom("nalmartinc@gmail.com", "Nalmart Support");
             helper.setSubject(subject);
             helper.setSentDate(new Date());
+            helper.setText ( message +
+                    "\n\n Regards" +
+                    "\nNalmart Support\n" +
+                    "nalmartinc@gmail.com | info@nalmart.com | (256)758085749" +
+                    "\nNalmart Inc | nalmart.com");
 
             // Load the HTML template
-            Context context = new Context();
-            context.setVariable("message", message); // Pass message to the template
-            String emailBody = templateEngine.process("custom-email-template", context); // Load and process the HTML template
+//            Context context = new Context();
+//            context.setVariable("message", message); // Pass message to the template
+//            String emailBody = templateEngine.process("custom-email-template", context); // Load and process the HTML template
 
-            helper.setText(emailBody, true); // Set the email body as HTML
+//            helper.setText(emailBody, false); // Set the email body as HTML or not
 
             mailSender.send(mail);
 

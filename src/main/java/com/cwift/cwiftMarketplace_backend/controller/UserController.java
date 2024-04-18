@@ -22,8 +22,13 @@ public class UserController {
     }
 
     @PostMapping("/u1")
-    public ResponseEntity<User> createAccount( @RequestBody User user ){
+    public ResponseEntity<User> createUserAccount( @RequestBody User user ){
         return ResponseEntity.ok (userService.createUser ( user ));
+    }
+
+    @PostMapping("/admin")
+    public ResponseEntity<User> createAdminAccount( @RequestBody User user ){
+        return ResponseEntity.ok (userService.createAdminUser ( user ));
     }
 
     @PutMapping("/v/{userEmail}")

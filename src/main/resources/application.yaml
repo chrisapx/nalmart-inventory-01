@@ -5,7 +5,7 @@ spring:
       matching-strategy: ANT_PATH_MATCHER
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: ${DB_URL}/offers
+#    url: ${DB_URL}/nalmart_data1
 #    username: ${DB_USERNAME}
 #    password: ${DB_PASSWORD}
 #    url: jdbc:mysql://localhost/nalmart

@@ -18,6 +18,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -80,6 +82,31 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException(e);
         }
         return null;
+    }
+
+    @Override
+    @Secured({"ADMIN", "USER", "SUPER_ADMIN"})
+    public User createAdminUser ( User user ) {
+        try {
+            user.setRoles(List.of(Role.builder().roleName(RoleName.ADMIN).build()));
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setVerified ( true );
+
+            User createdAccount = userRepository.save(user);
+             emailSenderServiceimpl.sendEmail (
+                            createdAccount.getEmail (),
+                            "Nalmart Verification Code",
+                            "Hello Admin\n\n"
+                                    +"Your account credentials are: \n\n Username: " +user.getUsername () + " \n Password: "+ user.getPassword () + " \n\n Use those credentials to login into the system"
+                                    +"Ensure to keep your credentials secure since you are unable to customize them at the moment\n\n"
+                                    +"Happy management"
+                    );
+                log.info ( "Account created for admin" + user.getLastname () );
+                return createdAccount;
+            }
+        catch (MessagingException | UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
@@ -236,4 +263,6 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException ( e );
         }
     }
+
+
 }
