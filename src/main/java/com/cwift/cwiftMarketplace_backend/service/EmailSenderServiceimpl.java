@@ -38,7 +38,7 @@ public class EmailSenderServiceimpl implements EmailSenderService {
             helper.setSubject(subject);
             helper.setSentDate(new Date());
             helper.setText ( message +
-                    "\n\n Regards" +
+                    "\n\nRegards" +
                     "\nNalmart Support\n" +
                     "nalmartinc@gmail.com | info@nalmart.com | (256)758085749" +
                     "\nNalmart Inc | nalmart.com");

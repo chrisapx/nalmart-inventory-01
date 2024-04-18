@@ -95,9 +95,9 @@ public class UserServiceImpl implements UserService {
             User createdAccount = userRepository.save(user);
              emailSenderServiceimpl.sendEmail (
                             createdAccount.getEmail (),
-                            "Nalmart Verification Code",
+                            "Nalmart Admin Account confirmation",
                             "Hello Admin\n\n"
-                                    +"Your account credentials are: \n\n Username: " +user.getUsername () + " \n Password: "+ user.getPassword () + " \n\n Use those credentials to login into the system"
+                                    +"Your account credentials are:\n\n Username: " +user.getUsername () + "\n Password: "+ user.getPassword () + "\n\n Use those credentials to login into the system"
                                     +"Ensure to keep your credentials secure since you are unable to customize them at the moment\n\n"
                                     +"Happy management"
                     );
