@@ -1,6 +1,7 @@
 package com.cwift.cwiftMarketplace_backend.service.serviceInterfaces;
 
 import com.cwift.cwiftMarketplace_backend.model.ItemOrder;
+import org.springframework.security.access.annotation.Secured;
 
 import java.util.List;
 
@@ -14,4 +15,7 @@ public interface ItemOrderService {
     public ItemOrder editItemOrder(String orderID, ItemOrder itemOrder);
 
     public List<String> getOrderStatusList ();
+
+    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
+    List<ItemOrder> getOrders ();
 }

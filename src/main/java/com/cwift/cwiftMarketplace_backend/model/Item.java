@@ -63,5 +63,4 @@ public class Item {
     @Temporal(TemporalType.DATE)
     private Date dateCreated = new Date ();
     private Date dateModified;
-
 }

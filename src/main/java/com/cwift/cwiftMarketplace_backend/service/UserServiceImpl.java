@@ -9,6 +9,7 @@ import com.cwift.cwiftMarketplace_backend.repository.OtpRepository;
 import com.cwift.cwiftMarketplace_backend.repository.UserRepository;
 import com.cwift.cwiftMarketplace_backend.service.serviceInterfaces.UserService;
 import com.cwift.cwiftMarketplace_backend.utils.IDGenerator;
+import com.cwift.cwiftMarketplace_backend.utils.UrlShortener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -88,6 +89,7 @@ public class UserServiceImpl implements UserService {
     @Secured({"ADMIN", "USER", "SUPER_ADMIN"})
     public User createAdminUser ( User user ) {
         try {
+            String oldpass = user.getPassword ();
             user.setRoles(List.of(Role.builder().roleName(RoleName.ADMIN).build()));
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setVerified ( true );
@@ -97,7 +99,9 @@ public class UserServiceImpl implements UserService {
                             createdAccount.getEmail (),
                             "Nalmart Admin Account confirmation",
                             "Hello Admin\n\n"
-                                    +"Your account credentials are:\n\n Username: " +user.getUsername () + "\n Password: "+ user.getPassword () + "\n\n Use those credentials to login into the system"
+                                    +"Your account credentials are:\n\n Username: " +user.getUsername () + "\n Password: "+ oldpass + "\n\n Use those credentials to login into the system \n\n"
+                                    +"Update the password here " + UrlShortener.shortenUrl ( "https://vendor.nalmart.com/admin/passwords?oldpass="+ oldpass )
+
                                     +"Ensure to keep your credentials secure since you are unable to customize them at the moment\n\n"
                                     +"Happy management"
                     );
@@ -124,6 +128,13 @@ public class UserServiceImpl implements UserService {
         log.info ( "User logged in " + authenticationRequest.getUsername () );
 
         return new AuthenticationResponse ( jwt );
+    }
+
+    @Override
+    public long countUsers (){
+        long count = userRepository.count ();
+        log.info ( "Total users: {}", count );
+        return count;
     }
 
     @Override
@@ -214,6 +225,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User editUserPassword ( String username, User user ) {
+        User oldUser = userRepository.findByUsernameOrEmailOrPhone ( username, username, username );
+        oldUser.setPassword ( passwordEncoder.encode ( user.getPassword () ) );
+        return userRepository.save ( oldUser );
+    }
+
+    @Override
     public String deleteUser ( long id ) {
         try{
             userRepository.deleteById ( id );
@@ -249,7 +267,7 @@ public class UserServiceImpl implements UserService {
                     "Hello \n\n"
                     +"Your new account verification Otp is ------- " + otp1.getOtp () + " ----- \n\nEnter it when prompted to provide Otp for account verification \n"
                     +"Alternatively, you can follow the link below to verify your account \n\n"
-                    +"http://localhost:8080/users/v/" + userEmail +"/otp .. \n\n\n"
+                    +"https://inventory.nalmart.com/users/v/" + userEmail +"?otp=" + otp1.getOtp () + ".. \n\n\n"
                     +"Happy shopping..."
 
             );
