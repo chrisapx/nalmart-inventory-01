@@ -51,6 +51,14 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    @Secured({"ADMIN", "VENDOR", "SUPER_ADMIN"})
+    public long countTotalItems () {
+        long count = itemRepository.count ();
+        log.info ( "Total items: {}", count );
+        return count;
+    }
+
+    @Override
     public Item getItemById ( long id ) {
         return itemRepository.findById ( id ).get ();
     }

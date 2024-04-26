@@ -35,6 +35,11 @@ public class ItemController {
         return ResponseEntity.ok (itemServiceImpl.getAllItems ());
     }
 
+    @GetMapping("/total")
+    public ResponseEntity<Long> getTotalItems(){
+        return ResponseEntity.ok (itemServiceImpl.countTotalItems ());
+    }
+
     @GetMapping("/names")
     public ResponseEntity<List<Item>> getAllItemsWithNames(@RequestParam List<String> names){
         return ResponseEntity.ok (itemServiceImpl.getAllInNames (names));

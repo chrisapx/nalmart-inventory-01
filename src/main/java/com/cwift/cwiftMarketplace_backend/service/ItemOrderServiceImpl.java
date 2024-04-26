@@ -4,6 +4,8 @@ import com.cwift.cwiftMarketplace_backend.model.ItemOrder;
 import com.cwift.cwiftMarketplace_backend.model.OrderStatus;
 import com.cwift.cwiftMarketplace_backend.repository.ItemOrderRepository;
 import com.cwift.cwiftMarketplace_backend.service.serviceInterfaces.ItemOrderService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ import java.util.stream.Collectors;
 @Service
 public class ItemOrderServiceImpl implements ItemOrderService {
 
+    private static final Logger log = LoggerFactory.getLogger ( ItemOrderServiceImpl.class );
     private final ItemOrderRepository itemOrderRepository;
 
     public ItemOrderServiceImpl ( ItemOrderRepository itemOrderRepository ) {
@@ -54,5 +57,12 @@ public class ItemOrderServiceImpl implements ItemOrderService {
     @Secured ({"ADMIN", "VENDOR", "SUPER_ADMIN", "USER"})
     public List<String> getOrderStatusList () {
         return Arrays.stream( OrderStatus.values () ).map ( Enum::name ).collect( Collectors.toList());
+    }
+
+    @Override
+    @Secured ({"ADMIN", "VENDOR", "SUPER_ADMIN"})
+    public List<ItemOrder> getOrders () {
+        log.info ( "Viewed all orders" );
+        return itemOrderRepository.findAll ();
     }
 }

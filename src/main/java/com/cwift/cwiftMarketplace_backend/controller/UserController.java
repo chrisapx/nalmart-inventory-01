@@ -31,6 +31,11 @@ public class UserController {
         return ResponseEntity.ok (userService.createAdminUser ( user ));
     }
 
+    @PutMapping("/pass")
+    public ResponseEntity<User> updateUserPassword( @RequestParam String username, @RequestBody User user ){
+        return ResponseEntity.ok (userService.editUserPassword ( username, user ));
+    }
+
     @PutMapping("/v/{userEmail}")
     public ResponseEntity<Boolean> verifyAccount( @PathVariable String userEmail, @RequestParam String otp ){
         return ResponseEntity.ok (userService.verifyAccount ( userEmail, otp ));
@@ -59,6 +64,11 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserByID( @PathVariable long id ){
         return ResponseEntity.ok (userService.getUserByID ( id ));
+    }
+
+    @GetMapping("/total")
+    public ResponseEntity<Long> getTotalUsers(){
+        return ResponseEntity.ok (userService.countUsers ());
     }
 
     @GetMapping("/user/{username}")
